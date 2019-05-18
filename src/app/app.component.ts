@@ -14,7 +14,7 @@ interface Nav {
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
-      <nav *ngIf="userService.getUser()" class="nav">
+      <nav *ngIf="user()" class="nav">
         <a
           *ngFor="let item of nav"
           [routerLink]="item.link"
@@ -23,8 +23,8 @@ interface Nav {
           {{ item.name }}
         </a>
       </nav>
-      <div *ngIf="userService.getUser()">
-        Hello {{userService.getUser().username}}.
+      <div *ngIf="user()">
+        Hello {{user().username}}.
         <a href="#" (click)="logout($event)">log out</a>
       </div>
       <router-outlet></router-outlet>
@@ -52,6 +52,10 @@ export class AppComponent {
   ];
 
   constructor(private userService: UserService, private router: Router) {
+  }
+
+  user() {
+    return this.userService.getUser();
   }
 
   logout(e) {

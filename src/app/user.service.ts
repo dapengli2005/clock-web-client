@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { User } from './models/user.interface';
 import { API_BASE } from './constants';
@@ -14,18 +14,14 @@ const LOGIN_URL: string = `${API_BASE}/users/login`;
 @Injectable()
 export class UserService {
   user: User;
-  constructor(private http: Http) {}
+  constructor(private httpClient: HttpClient) {}
 
   login(username: string): Observable<User> {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    const options = new RequestOptions({ headers });
     const body = { username };
-    return this.http
-      .post(LOGIN_URL, body, options)
-      .map((response: Response) => {
-        this.user = response.json();
+    return this.httpClient
+      .post<User>(LOGIN_URL, body)
+      .map((user: User) => {
+        this.user = user;
         return this.user;
       })
       .catch((error: any) => Observable.throw(error.json()));
