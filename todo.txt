@@ -1,0 +1,10 @@
+- add loading
+- DRY http calls with headers
+- add test for services
+- clean up injectable, not needed?
+- flatten directories
+- update readme
+
+improve
+- use proper datetime picker
+- casing
