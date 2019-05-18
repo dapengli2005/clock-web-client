@@ -13,7 +13,7 @@ import { ClockService } from '../../clock.service';
       (input)="onNoteChange(noteInput.value)"
       #noteInput>
     <div *ngIf="nextEntry">
-      <button (click)="handleClick()">Clock {{nextEntry.type}}</button>
+      <button (click)="handleClick()">Clock {{nextEntry.action_type}}</button>
     </div>
   `
 })
