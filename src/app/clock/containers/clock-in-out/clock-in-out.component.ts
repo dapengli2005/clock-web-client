@@ -7,14 +7,29 @@ import { ClockService } from '../../clock.service';
   selector: 'clock-in-out',
   template: `
     <div class="loader" *ngIf="loading"></div>
-    <div *ngIf="!loading">
-      <span>Note: </span>
-      <input
-        type="text"
-        [value]="note"
-        (input)="onNoteChange(noteInput.value)"
-        #noteInput>
-        <button (click)="handleClick()">Clock {{nextEntry.action_type}}</button>
+    <div class="container" style="margin-top: 70px;" *ngIf="!loading">
+      <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+          <div>
+            <form>
+              <div class="form-group">
+                <label for="note">Note (optional)</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  [value]="note"
+                  (input)="onNoteChange(noteInput.value)"
+                  aria-describedby="noteHelp"
+                  #noteInput>
+                </textarea>
+                <small id="noteHelp" class="form-text text-muted">Additional note about the Clock In/Out action</small>
+
+                <button type="button" class="btn btn-primary" (click)="handleClick()">Clock {{nextEntry.action_type}}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   `
 })

@@ -23,7 +23,7 @@ import { User } from './models/user.interface';
                   aria-describedby="usernameHelp"
                   #nameInput>
                 <small id="usernameHelp" class="form-text text-muted">A new user will be created the first time you login</small>
-                <button type="button" class="btn btn-lg btn-primary" [disabled]="!username" (click)="login()">
+                <button type="button" class="btn btn-primary" [disabled]="!username" (click)="login()">
                   Login
                 </button>
               </div>
