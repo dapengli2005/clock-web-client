@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from './user.service';
@@ -7,26 +7,34 @@ import { User } from './models/user.interface';
 @Component({
   selector: 'app-home',
   template: `
-    <div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
-      <h1>Angular Bootstrap Demo</h1>
-      <div class="lead">
-        <span>Username: </span>
-        <div>
-          <input
-            type="text"
-            [value]="username"
-            (input)="onNameChange(nameInput.value)"
-            #nameInput>
-          <button class="btn btn-lg btn-primary" [disabled]="!username" (click)="login()">
-            Login
-          </button>
+    <div class="container" style="margin-top: 70px;">
+      <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+          <h3>Login to start</h3>
+          <div>
+            <form>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="username"
+                  (input)="onNameChange(nameInput.value)"
+                  aria-describedby="usernameHelp"
+                  #nameInput>
+                <small id="usernameHelp" class="form-text text-muted">A new user will be created the first time you login</small>
+                <button type="button" class="btn btn-lg btn-primary" [disabled]="!username" (click)="login()">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   `
 })
-@Injectable()
 export class HomeComponent implements OnInit {
-  @Input()
   username: string = '';
 
   constructor(private userService: UserService, private router: Router) {
