@@ -57,6 +57,8 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
+
     this.userService
       .login(this.username)
       .subscribe((user: User) => this.router.navigate(['/clock']),
