@@ -1,5 +1,0 @@
-- show prev event in clock in/out page
-
-improve
-- use proper datetime picker
-- casing
