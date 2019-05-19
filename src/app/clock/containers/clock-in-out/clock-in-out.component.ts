@@ -25,6 +25,10 @@ import { ClockService } from '../../clock.service';
                 <small id="noteHelp" class="form-text text-muted">Additional note about the Clock In/Out action</small>
 
                 <button type="button" class="btn btn-primary" (click)="handleClick()">Clock {{nextEntry.action_type}}</button>
+
+                <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+                  {{this.error}}
+                </div>
               </div>
             </form>
           </div>
@@ -36,6 +40,7 @@ import { ClockService } from '../../clock.service';
 export class ClockInOutComponent implements OnInit {
   loading: boolean = false;
   note: string = '';
+  error: string;
   nextEntry: ClockEntry;
 
   constructor(private clockService : ClockService, private router: Router) {
@@ -46,9 +51,10 @@ export class ClockInOutComponent implements OnInit {
 
     this.clockService.getNext()
       .subscribe((val: ClockEntry) => {
-        this.nextEntry = val;
-        this.loading = false;
-      });
+          this.nextEntry = val;
+          this.loading = false;
+        },
+        this.handleRequestError.bind(this));
   }
 
   onNoteChange(val) {
@@ -64,7 +70,13 @@ export class ClockInOutComponent implements OnInit {
     this.loading = true;
 
     this.clockService.registerEntry(entry)
-      .subscribe(() => this.router.navigate(['/clock/history']));
+      .subscribe(() => this.router.navigate(['/clock/history']),
+        this.handleRequestError.bind(this));
+  }
+
+  handleRequestError(resp: any) {
+    this.error = (resp && resp.error && resp.error.message) || 'The operation cannot be performed.';
+    this.loading = false;
   }
 }
 

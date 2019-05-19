@@ -7,7 +7,8 @@ import { User } from './models/user.interface';
 @Component({
   selector: 'app-home',
   template: `
-    <div class="container" style="margin-top: 70px;">
+    <div class="loader" *ngIf="loading"></div>
+    <div class="container" style="margin-top: 70px;" *ngIf="!loading">
       <div class="row">
         <div class="col-sm-8 offset-sm-2">
           <h3>Login to start</h3>
@@ -27,6 +28,9 @@ import { User } from './models/user.interface';
                   Login
                 </button>
               </div>
+              <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+                {{this.error}}
+              </div>
             </form>
           </div>
         </div>
@@ -35,7 +39,9 @@ import { User } from './models/user.interface';
   `
 })
 export class HomeComponent implements OnInit {
+  loading: boolean = false;
   username: string = '';
+  error: string;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -53,8 +59,12 @@ export class HomeComponent implements OnInit {
   login() {
     this.userService
       .login(this.username)
-      .subscribe((user: User) => {
-        this.router.navigate(['/clock']);
-      });
+      .subscribe((user: User) => this.router.navigate(['/clock']),
+        this.handleRequestError.bind(this));
+  }
+
+  handleRequestError(resp: any) {
+    this.error = (resp && resp.error && resp.error.message) || 'The operation cannot be performed.';
+    this.loading = false;
   }
 }

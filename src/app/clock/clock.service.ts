@@ -9,9 +9,6 @@ import { ClockEntry } from './models/clock-entry.interface';
 import { PaginatedClockEntries, PaginationMeta } from './models/paginated-clock-entries.interface';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
 
 const NEXT_ENTRY_URL: string = `${API_BASE}/users/:user_id/clock_entries/next`;
 const REGISTER_ENTRY_URL: string = `${API_BASE}/users/:user_id/clock_entries`;
@@ -28,28 +25,24 @@ export class ClockService {
   getNext(): Observable<ClockEntry> {
     const url = NEXT_ENTRY_URL.replace(':user_id', `${this.userService.getUser().id}`);
     return this.httpClient
-      .get<ClockEntry>(url)
-      .catch((error: any) => Observable.throw(error.json()));
+      .get<ClockEntry>(url);
   }
 
   registerEntry(entry: ClockEntry): Observable<ClockEntry> {
     const url = REGISTER_ENTRY_URL.replace(':user_id', `${this.userService.getUser().id}`);
     return this.httpClient
-      .post<ClockEntry>(url, entry)
-      .catch((error: any) => Observable.throw(error.json()));
+      .post<ClockEntry>(url, entry);
   }
 
   getEntries(): Observable<PaginatedClockEntries> {
     const url = GET_ENTRIES_URL.replace(':user_id', `${this.userService.getUser().id}`);
     return this.httpClient
-      .get<PaginatedClockEntries>(url)
-      .catch((error: any) => Observable.throw(error.json()));
+      .get<PaginatedClockEntries>(url);
   }
 
   getEntriesBy({ url, method }: PaginationMeta): Observable<PaginatedClockEntries> {
     return this.httpClient
-      .request<PaginatedClockEntries>(method, url)
-      .catch((error: any) => Observable.throw(error.json()));
+      .request<PaginatedClockEntries>(method, url);
   }
 
   getEntry(id: number): Observable<ClockEntry> {
@@ -57,8 +50,7 @@ export class ClockService {
                              .replace(':id', `${id}`);
 
     return this.httpClient
-      .get<ClockEntry>(url)
-      .catch((error: any) => Observable.throw(error.json()));
+      .get<ClockEntry>(url);
   }
 
   updateEntry(entry: ClockEntry): Observable<ClockEntry> {
@@ -66,8 +58,7 @@ export class ClockService {
                                 .replace(':id', `${entry.id}`);
 
     return this.httpClient
-      .put<ClockEntry>(url, entry)
-      .catch((error: any) => Observable.throw(error.json()));
+      .put<ClockEntry>(url, entry);
   }
 
   deleteEntry(entry: ClockEntry): Observable<ClockEntry> {
@@ -75,8 +66,7 @@ export class ClockService {
                                 .replace(':id', `${entry.id}`);
 
     return this.httpClient
-      .delete<ClockEntry>(url)
-      .catch((error: any) => Observable.throw(error.json()));
+      .delete<ClockEntry>(url);
   }
 
   createEntry(entry: ClockEntry): Observable<ClockEntry> {
@@ -87,8 +77,7 @@ export class ClockService {
       .post<ClockEntry>(url, {
         ...entry,
         user_id: userId
-      })
-      .catch((error: any) => Observable.throw(error.json()));
+      });
   }
 }
 

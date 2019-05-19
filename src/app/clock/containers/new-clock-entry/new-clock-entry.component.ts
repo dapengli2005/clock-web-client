@@ -16,6 +16,9 @@ import { ClockEntry } from '../../models/clock-entry.interface';
               <clock-entry-form [entry]="entry"></clock-entry-form>
               <button class="btn btn-primary" (click)="create()">Create</button>
             </div>
+            <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+              {{this.error}}
+            </div>
           </div>
         </div>
       </div>
@@ -24,6 +27,7 @@ import { ClockEntry } from '../../models/clock-entry.interface';
 })
 export class NewClockEntryComponent {
   loading: boolean = false;
+  error: string;
   entry: ClockEntry;
 
   constructor(private clockService: ClockService, private router: Router) {
@@ -38,7 +42,13 @@ export class NewClockEntryComponent {
     this.loading = true;
 
     this.clockService.createEntry(this.entry)
-      .subscribe(() => this.router.navigate(['/clock/history']));
+      .subscribe(() => this.router.navigate(['/clock/history']),
+        this.handleRequestError.bind(this));
+  }
+
+  handleRequestError(resp: any) {
+    this.error = (resp && resp.error && resp.error.message) || 'The operation cannot be performed.';
+    this.loading = false;
   }
 }
 

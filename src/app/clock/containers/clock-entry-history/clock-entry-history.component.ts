@@ -37,10 +37,14 @@ import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-cl
         </tbody>
       </table>
     </div>
+    <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+      {{this.error}}
+    </div>
   `
 })
 export class ClockEntryHistoryComponent implements OnInit {
   loading: boolean = false;
+  error: string;
   paginatedEntries: PaginatedClockEntries;
 
   constructor(private clockService : ClockService, private router: Router) {
@@ -51,9 +55,10 @@ export class ClockEntryHistoryComponent implements OnInit {
 
     this.clockService.getEntries()
       .subscribe(val => {
-        this.paginatedEntries = val;
-        this.loading = false;
-      });
+          this.paginatedEntries = val;
+          this.loading = false;
+        },
+        this.handleRequestError.bind(this));
   }
 
   goTo(e, paginationMeta: PaginationMeta) {
@@ -63,14 +68,20 @@ export class ClockEntryHistoryComponent implements OnInit {
 
     this.clockService.getEntriesBy(paginationMeta)
       .subscribe(val => {
-        this.paginatedEntries = val;
-        this.loading = false;
-      });
+          this.paginatedEntries = val;
+          this.loading = false;
+        },
+        this.handleRequestError.bind(this));
   }
 
   onEdit(e, id: number) {
     e.preventDefault();
     this.router.navigate([`/clock/edit/${id}`]);
+  }
+
+  handleRequestError(resp: any) {
+    this.error = (resp && resp.error && resp.error.message) || 'The operation cannot be performed.';
+    this.loading = false;
   }
 }
 
