@@ -17,6 +17,7 @@ export class UserService {
 
   login(username: string): Observable<User> {
     const body = { username };
+
     return this.httpClient
       .post<User>(LOGIN_URL, body)
       .map((user: User) => {
