@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ClockService } from '../../clock.service';
+import { ClockService } from '../clock.service';
 
-import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-clock-entries.interface';
+import { PaginatedClockEntries, PaginationMeta } from '../models/paginated-clock-entries.interface';
 
 @Component({
   selector: 'clock-entry-history',
-  styleUrls: ['clock-entry-history.component.scss'],
+  styleUrls: ['clock-entry-history.component.css'],
   template: `
     <div class="loader" *ngIf="loading"></div>
     <div class="container" style="margin-top: 70px;" *ngIf="!loading && paginatedEntries">

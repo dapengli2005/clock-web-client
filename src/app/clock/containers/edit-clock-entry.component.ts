@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import { ClockService } from '../../clock.service';
-import { ClockEntry } from '../../models/clock-entry.interface';
+import { ClockService } from '../clock.service';
+import { ClockEntry } from '../models/clock-entry.interface';
 
 @Component({
   selector: 'edit-clock-entry',

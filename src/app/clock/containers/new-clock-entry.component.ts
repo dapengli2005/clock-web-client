@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ClockService } from '../../clock.service';
-import { ClockEntry } from '../../models/clock-entry.interface';
+import { ClockService } from '../clock.service';
+import { ClockEntry } from '../models/clock-entry.interface';
 
 @Component({
   selector: 'edit-clock-entry',
