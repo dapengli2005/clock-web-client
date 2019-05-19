@@ -58,6 +58,10 @@ export class EditClockEntryComponent implements OnInit {
   }
 
   remove() {
+    if(!confirm('Are you sure?')) {
+      return;
+    }
+
     this.loading = true;
     this.error = null;
 
