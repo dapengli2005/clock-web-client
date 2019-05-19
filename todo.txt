@@ -1,9 +1,4 @@
-- add loading
-- DRY http calls with headers
-- add test for services
-- clean up injectable, not needed?
-- flatten directories
-- update readme
+- show prev event in clock in/out page
 
 improve
 - use proper datetime picker
