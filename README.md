@@ -1,6 +1,6 @@
 # ClockWebClient
 
-This is the HTML client (referred to as _the frontend_ below) for [clock-api](https://github.com/dapengli2005/clock-web-client) (referred to as _the backend_ below), built with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+This is the [HTML client](https://github.com/dapengli2005/clock-web-client) (referred to as _the frontend_ below) for [clock-api](https://github.com/dapengli2005/clock-api) (referred to as _the backend_ below), built with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
 View live demo on [heroku](https://clock-client.herokuapp.com/), it runs on free dynos so delay is expected.
 
