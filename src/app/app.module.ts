@@ -12,6 +12,8 @@ import { NotFoundComponent } from './not-found.component';
 import { AppComponent } from './app.component';
 
 import { UserService } from './user.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -22,7 +24,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

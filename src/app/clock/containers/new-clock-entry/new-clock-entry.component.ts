@@ -9,8 +9,16 @@ import { ClockEntry } from '../../models/clock-entry.interface';
   template: `
     <div class="loader" *ngIf="loading"></div>
     <div *ngIf="!loading">
-      <clock-entry-form [entry]="entry"></clock-entry-form>
-      <button (click)="create()">Create</button>
+      <div class="container" style="margin-top: 70px;">
+        <div class="row">
+          <div class="col-sm-8 offset-sm-2">
+            <div>
+              <clock-entry-form [entry]="entry"></clock-entry-form>
+              <button class="btn btn-primary" (click)="create()">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `
 })

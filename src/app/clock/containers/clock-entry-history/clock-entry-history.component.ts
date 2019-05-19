@@ -10,12 +10,32 @@ import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-cl
   styleUrls: ['clock-entry-history.component.scss'],
   template: `
     <div class="loader" *ngIf="loading"></div>
-    <div *ngIf="!loading">
-      <div *ngFor="let entry of paginatedEntries.data">
-          {{entry.action_type}} - {{entry.datetime | date:'medium'}}<span class="note" *ngIf="entry.note"> ({{entry.note}}) </span><a href="#" (click)="onEdit($event, entry.id)">Edit</a>
-      </div>
-      <a href="#" *ngIf="paginatedEntries.meta?.prev" (click)="goTo($event, paginatedEntries.meta.prev)">prev</a>
-      <a href="#" *ngIf="paginatedEntries.meta?.next" (click)="goTo($event, paginatedEntries.meta.next)">next</a>
+    <div class="container" style="margin-top: 70px;" *ngIf="!loading">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of paginatedEntries.data">
+
+            <td>{{ entry.id }}</td>
+            <td>{{ entry.action_type }}</td>
+            <td>{{ entry.datetime | date:'medium' }}</td>
+            <td class="note">{{ entry.note }}</td>
+            <td>
+              <a href="#" class="btn btn-primary" (click)="onEdit($event, entry.id)">Edit</a>
+            </td>
+          </tr>
+          <a href="#" *ngIf="paginatedEntries.meta?.prev" (click)="goTo($event, paginatedEntries.meta.prev)">prev </a>
+          <a href="#" *ngIf="paginatedEntries.meta?.next" (click)="goTo($event, paginatedEntries.meta.next)"> next</a>
+        </tbody>
+      </table>
     </div>
   `
 })

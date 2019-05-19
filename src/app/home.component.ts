@@ -7,17 +7,21 @@ import { User } from './models/user.interface';
 @Component({
   selector: 'app-home',
   template: `
-      <span>Username: </span>
-      <div>
-        <input
-          type="text"
-          [value]="username"
-          (input)="onNameChange(nameInput.value)"
-          #nameInput>
-        <button [disabled]="!username" (click)="login()">
-          Login
-        </button>
+    <div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
+      <h1>Angular Bootstrap Demo</h1>
+      <div class="lead">
+        <span>Username: </span>
+        <div>
+          <input
+            type="text"
+            [value]="username"
+            (input)="onNameChange(nameInput.value)"
+            #nameInput>
+          <button class="btn btn-lg btn-primary" [disabled]="!username" (click)="login()">
+            Login
+          </button>
       </div>
+    </div>
   `
 })
 @Injectable()

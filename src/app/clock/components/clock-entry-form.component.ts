@@ -6,37 +6,48 @@ import { ClockEntry } from '../models/clock-entry.interface';
 @Component({
   selector: 'clock-entry-form',
   template: `
-    <div>
-      <span>Type: </span>
-      <select
-        name="action_type"
-        (change)="onTypeChange(typeInput.value)"
-        #typeInput
-      >
-        <option
-          *ngFor="let allowedType of allowedTypes"
-          [value]="allowedType"
-          [selected]="allowedType === entry.action_type">
-          {{ allowedType }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <span>Date: </span>
-      <input
-        type="datetime-local"
-        [ngModel]="entry.datetime | date:'yyyy-MM-ddTHH:mm'"
-        (ngModelChange)="onDatetimeChange(datetimeInput.value)"
-        #datetimeInput>
-    </div>
-    <div>
-      <span>Note: </span>
-      <input
-        type="text"
-        [value]="entry.note"
-        (input)="onNoteChange(noteInput.value)"
-        #noteInput>
-    </div>
+    <form>
+      <div class="form-group">
+        <label for="action_type">Type</label>
+        <select
+          class="form-control"
+          name="action_type"
+          (change)="onTypeChange(typeInput.value)"
+          aria-describedby="actionTypeHelp"
+          #typeInput
+        >
+          <option
+            *ngFor="let allowedType of allowedTypes"
+            [value]="allowedType"
+            [selected]="allowedType === entry.action_type">
+            {{ allowedType }}
+          </option>
+        </select>
+        <small id="actionTypeHelp" class="form-text text-muted">Select Clock Entry action type</small>
+
+        <label for="date">Date</label>
+        <input
+          type="datetime-local"
+          name="date"
+          class="form-control"
+          [ngModel]="entry.datetime | date:'yyyy-MM-ddTHH:mm'"
+          (ngModelChange)="onDatetimeChange(datetimeInput.value)"
+          aria-describedby="dateHelp"
+          #datetimeInput>
+        <small id="dateHelp" class="form-text text-muted">Select Date Time</small>
+
+        <label for="note">Note</label>
+        <textarea
+          type="text"
+          class="form-control"
+          [value]="entry.note"
+          (input)="onNoteChange(noteInput.value)"
+          aria-describedby="noteHelp"
+          #noteInput>
+        </textarea>
+        <small id="noteHelp" class="form-text text-muted">Note (optional)</small>
+      </div>
+    </form>
   `
 })
 export class ClockEntryFormComponent {

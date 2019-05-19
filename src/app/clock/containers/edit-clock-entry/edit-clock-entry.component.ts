@@ -11,9 +11,17 @@ import { ClockEntry } from '../../models/clock-entry.interface';
   template: `
     <div class="loader" *ngIf="loading"></div>
     <div *ngIf="!loading">
-      <clock-entry-form [entry]="entry"></clock-entry-form>
-      <button (click)="update()">Update</button>
-      <button (click)="remove()">Delete</button>
+      <div class="container" style="margin-top: 70px;">
+        <div class="row">
+          <div class="col-sm-8 offset-sm-2">
+            <div>
+              <clock-entry-form [entry]="entry"></clock-entry-form>
+              <button class="btn btn-primary" (click)="update()">Update</button>
+              <button class="btn btn-danger" style="margin-left: 2%" (click)="remove()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `
 })

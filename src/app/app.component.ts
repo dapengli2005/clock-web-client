@@ -27,7 +27,9 @@ interface Nav {
         Hello {{user().username}}.
         <a href="#" (click)="logout($event)">log out</a>
       </div>
+      <app-header></app-header>
       <router-outlet></router-outlet>
+      <app-footer></app-footer>
     </div>
   `
 })
