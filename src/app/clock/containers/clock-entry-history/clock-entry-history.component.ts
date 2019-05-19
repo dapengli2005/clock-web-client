@@ -10,7 +10,7 @@ import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-cl
   styleUrls: ['clock-entry-history.component.scss'],
   template: `
     <div class="loader" *ngIf="loading"></div>
-    <div class="container" style="margin-top: 70px;" *ngIf="!loading">
+    <div class="container" style="margin-top: 70px;" *ngIf="!loading && paginatedEntries">
       <table class="table table-hover">
         <thead>
           <tr>
