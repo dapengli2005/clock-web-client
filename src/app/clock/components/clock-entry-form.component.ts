@@ -5,9 +5,10 @@ import { ClockEntry } from '../models/clock-entry.interface';
 
 @Component({
   selector: 'clock-entry-form',
+  styleUrls: ['./clock-entry-form.component.css'],
   template: `
     <form>
-      <div class="form-group">
+      <div class="form-group required">
         <label for="action_type">Type</label>
         <select
           class="form-control"
@@ -23,8 +24,10 @@ import { ClockEntry } from '../models/clock-entry.interface';
             {{ allowedType }}
           </option>
         </select>
-        <small id="actionTypeHelp" class="form-text text-muted">Select Clock Entry action type</small>
+        <small id="actionTypeHelp" class="form-text text-muted">Type of the event</small>
+      </div>
 
+      <div class="form-group required">
         <label for="date">Date</label>
         <input
           type="datetime-local"
@@ -34,9 +37,11 @@ import { ClockEntry } from '../models/clock-entry.interface';
           (ngModelChange)="onDatetimeChange(datetimeInput.value)"
           aria-describedby="dateHelp"
           #datetimeInput>
-        <small id="dateHelp" class="form-text text-muted">Select Date Time</small>
+        <small id="dateHelp" class="form-text text-muted">Date Time of the event</small>
+      </div>
 
-        <label for="note">Note (optional)</label>
+      <div class="form-group">
+        <label for="note">Note</label>
         <textarea
           type="text"
           class="form-control"
@@ -45,7 +50,7 @@ import { ClockEntry } from '../models/clock-entry.interface';
           aria-describedby="noteHelp"
           #noteInput>
         </textarea>
-        <small id="noteHelp" class="form-text text-muted">Additional note about the Clock In/Out action</small>
+        <small id="noteHelp" class="form-text text-muted">Additional note about the event</small>
       </div>
     </form>
   `
