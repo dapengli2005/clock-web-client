@@ -36,7 +36,7 @@ import { ClockEntry } from '../models/clock-entry.interface';
           #datetimeInput>
         <small id="dateHelp" class="form-text text-muted">Select Date Time</small>
 
-        <label for="note">Note</label>
+        <label for="note">Note (optional)</label>
         <textarea
           type="text"
           class="form-control"
@@ -45,7 +45,7 @@ import { ClockEntry } from '../models/clock-entry.interface';
           aria-describedby="noteHelp"
           #noteInput>
         </textarea>
-        <small id="noteHelp" class="form-text text-muted">Note (optional)</small>
+        <small id="noteHelp" class="form-text text-muted">Additional note about the Clock In/Out action</small>
       </div>
     </form>
   `
