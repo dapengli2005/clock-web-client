@@ -15,6 +15,11 @@ View live demo on [heroku](https://clock-client.herokuapp.com/), it runs on free
 - edit single clock in/out entry
 - delete single clock in/out entry
 - manually create clock in/out entry
+- logoff user
+
+## Known issues
+
+- the frontend simulates authentication by storing logged-in user info in memory, which will be lost upon refreshing the page (in other words, frontend will not function after refreshing, until user is logged in again)
 
 ## Validations
 
@@ -29,7 +34,7 @@ View live demo on [heroku](https://clock-client.herokuapp.com/), it runs on free
 
 - date times are displayed using timezone and locale determined from user's browser
 - the backend persists date time in UTC
-- the backend sends date time fields in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) in JSON response
+- the backend sends and expects date time fields in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) in its API
 
 # Development
 
