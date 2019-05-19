@@ -7,11 +7,15 @@ import { ClockEntry } from '../../models/clock-entry.interface';
 @Component({
   selector: 'edit-clock-entry',
   template: `
-    <clock-entry-form [entry]="entry"></clock-entry-form>
-    <button (click)="create()">Create</button>
+    <div class="loader" *ngIf="loading"></div>
+    <div *ngIf="!loading">
+      <clock-entry-form [entry]="entry"></clock-entry-form>
+      <button (click)="create()">Create</button>
+    </div>
   `
 })
 export class NewClockEntryComponent {
+  loading: boolean = false;
   entry: ClockEntry;
 
   constructor(private clockService: ClockService, private router: Router) {
@@ -23,6 +27,8 @@ export class NewClockEntryComponent {
   }
 
   create() {
+    this.loading = true;
+
     this.clockService.createEntry(this.entry)
       .subscribe(() => this.router.navigate(['/clock/history']));
   }

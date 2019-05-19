@@ -9,7 +9,8 @@ import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-cl
   selector: 'clock-entry-history',
   styleUrls: ['clock-entry-history.component.scss'],
   template: `
-    <div *ngIf="paginatedEntries">
+    <div class="loader" *ngIf="loading"></div>
+    <div *ngIf="!loading">
       <div *ngFor="let entry of paginatedEntries.data">
           {{entry.action_type}} - {{entry.datetime | date:'medium'}}<span class="note" *ngIf="entry.note"> ({{entry.note}}) </span><a href="#" (click)="onEdit($event, entry.id)">Edit</a>
       </div>
@@ -19,20 +20,32 @@ import { PaginatedClockEntries, PaginationMeta } from '../../models/paginated-cl
   `
 })
 export class ClockEntryHistoryComponent implements OnInit {
+  loading: boolean = false;
   paginatedEntries: PaginatedClockEntries;
 
   constructor(private clockService : ClockService, private router: Router) {
   }
 
   ngOnInit() {
+    this.loading = true;
+
     this.clockService.getEntries()
-      .subscribe(val => this.paginatedEntries = val);
+      .subscribe(val => {
+        this.paginatedEntries = val;
+        this.loading = false;
+      });
   }
 
   goTo(e, paginationMeta: PaginationMeta) {
     e.preventDefault();
+
+    this.loading = true;
+
     this.clockService.getEntriesBy(paginationMeta)
-      .subscribe(val => this.paginatedEntries = val);
+      .subscribe(val => {
+        this.paginatedEntries = val;
+        this.loading = false;
+      });
   }
 
   onEdit(e, id: number) {
